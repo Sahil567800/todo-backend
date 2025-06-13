@@ -1,17 +1,13 @@
 import mongoose from "mongoose";
 
-export const conn = async (req, res) => {
+export const conn = async () => {
     try {
         await mongoose.connect("mongodb://localhost:27017/todo")
-            .then(() => {
-                console.log("database connected")
-            })
+        console.log("database connected")
     } catch (error) {
-        res.status(400).json({
-            message: "not connected"
-        })
+        console.error(" database connection failed:", error.message);
     }
 
 
 }
-conn()
+

@@ -6,7 +6,7 @@ const router = Router()
 router.post('/signUp',async(req,res)=>{
     try {
         const {email,password,username} = req.body
-        const userExist = await User.findOne({email:req.body.email})
+        const userExist = await User.findOne({email})
         if(userExist){
             return  res.status(400).json({message:"User Already exists"})
         }
@@ -14,7 +14,7 @@ router.post('/signUp',async(req,res)=>{
         await user.save() 
         res.status(201).json({message:"Sign Up Successfully"})
     } catch (error) {
-        res.status(400).json({message:"user Already exists"})
+       res.status(500).json({ message: "Something went wrong", error: error.message });
     }
 })
 
@@ -34,7 +34,7 @@ router.post('/login',async(req,res)=>{
           return res.status(200).json({userData})
 
     } catch (error) {
-          res.status(400).json({message:"error"})
+          res.status(500).json({ message: "Internal server error", error: error.message, })
     }
 })
 export default router

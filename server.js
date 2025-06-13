@@ -7,6 +7,7 @@ import crud from "./routes/crud.js"
 const app = express()
 const port = 3000
 
+await conn()
 app.use(cors())
 app.get('/',(req,res)=>{
     res.send("hello sahil")

@@ -2,11 +2,10 @@ import mongoose from "mongoose";
 
 const todosSchema = mongoose.Schema({
     todos:{type:String,required:true},
-    user:[{
-    type:mongoose.Types.ObjectId,
+    user:{
+    type:mongoose.Schema.Types.ObjectId,
     ref:"User"
-    },
-]
+    }
 },
 {timestamps:true}
 )

@@ -9,19 +9,18 @@ router.post('/addTodo', async (req, res) => {
         const { todos, email } = req.body
         const userExist = await User.findOne({ email })
         if (userExist) {
-            const newTodo = new Todo({ todos, user: userExist });
+            const newTodo = new Todo({ todos, user: userExist._id });
             await newTodo.save();
-            userExist.todos.push(newTodo);
+            userExist.todos.push(newTodo._id);
             await userExist.save()
             res.status(201).json({ newTodo });
         }
         else {
             res.status(400).json({ message: "user does not exist" })
-            console.log(error)
         }
     } catch (error) {
-        console.log(error)
-        res.status(400).json({ message: "error" })
+        console.error("Error adding todo:", error);
+        res.status(500).json({ message: "Something went wrong", error: error.message })
     }
 
 })
@@ -30,7 +29,6 @@ router.post('/addTodo', async (req, res) => {
 router.put('/updateTodo/:id', async (req, res) => {
     try {
         const { todos, email } = req.body
-        console.log(req.body)
         const userExist = await User.findOne({ email })
         if (userExist) {
             const updateTodo = await Todo.findByIdAndUpdate(req.params.id, { todos }, { new: true })
@@ -44,7 +42,10 @@ router.put('/updateTodo/:id', async (req, res) => {
         }
     } catch (error) {
         console.log(error)
-        res.status(400).json({ message: "user does not exist" })
+        res.status(500).json({
+            message: "Something went wrong while updating the todo",
+            error: error.message
+        })
     }
 
 })
@@ -67,19 +68,24 @@ router.delete('/deleteTodo/:id', async (req, res) => {
         res.status(200).json({ message: "Todo Deleted Succesfully" })
     } catch (error) {
         console.log(error)
-        res.status(500).json({ message: "Internal Server Error" })
+        res.status(500).json({
+            message: "Internal Server Error",
+            error: error.message
+        })
     }
 })
 
 router.post('/getTodos', async (req, res) => {
     try {
         const { user } = req.body;
-        const todos = await Todo.find({ user});
-        console.log(todos,"i am todos")
-        res.json({ todos });
+        const todos = await Todo.find({ user });
+        res.status(200).json({ todos });
     } catch (error) {
         console.log(error)
-        res.status(500).json({ message: "Internal Server Error" })
+        res.status(500).json({
+            message: "Internal Server Error",
+            error: error.message
+        })
     }
 })
 export default router
