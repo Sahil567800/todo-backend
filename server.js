@@ -8,7 +8,7 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 const corsOptions = {
-  origin: "https://todoosh-phi.vercel.app",
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
    credentials: false
 };
