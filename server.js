@@ -13,11 +13,11 @@ app.use(cors({
     credentials: true,
 }
 ))
+app.use(express.json())
 await conn()
 app.get('/', (req, res) => {
     res.send("hello sahil")
 })
-app.use(express.json())
 app.use("/api/v1", auth)
 app.use("/api/v2", crud)
 
