@@ -7,14 +7,14 @@ import crud from "./routes/crud.js"
 const app = express()
 const port = process.env.PORT || 3000;
 
-const corsOptions = {
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-   credentials: false
-};
+// const corsOptions = {
+//   origin: "*",
+//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+//    credentials: false
+// };
 
 // ✅ Apply CORS middleware
-app.use(cors(corsOptions));
+app.use(cors());
 
 app.use(express.json())
 await conn()
