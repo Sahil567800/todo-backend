@@ -8,14 +8,19 @@ const app = express()
 const port = 3000
 
 await conn()
-app.use(cors())
-app.get('/',(req,res)=>{
+app.use(cors({
+    origin: "https://todoosh-phi.vercel.app",
+    credentials: true,
+}
+
+))
+app.get('/', (req, res) => {
     res.send("hello sahil")
 })
 app.use(express.json())
-app.use("/api/v1",auth)
-app.use("/api/v2",crud)
+app.use("/api/v1", auth)
+app.use("/api/v2", crud)
 
-app.listen(port,()=>{
+app.listen(port, () => {
     console.log("server running at port:3000")
 })
