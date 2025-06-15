@@ -10,6 +10,7 @@ const port = 3000
 await conn()
 app.use(cors({
     origin: "https://todoosh-phi.vercel.app",
+     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
 }
 
