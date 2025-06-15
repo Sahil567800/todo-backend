@@ -5,7 +5,7 @@ import auth from "./routes/auth.js"
 import crud from "./routes/crud.js"
 
 const app = express()
-const port = 3000
+const port = process.env.PORT || 3000;
 
 app.use(cors({
     origin: "https://todoosh-phi.vercel.app",
