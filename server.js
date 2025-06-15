@@ -10,7 +10,6 @@ const port = process.env.PORT || 3000;
 const corsOptions = {
   origin: "https://todoosh-phi.vercel.app",
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  credentials: true,
 };
 
 // ✅ Apply CORS middleware
