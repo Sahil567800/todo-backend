@@ -7,12 +7,14 @@ import crud from "./routes/crud.js"
 const app = express()
 const port = process.env.PORT || 3000;
 
-app.use(cors({
-    origin: "https://todoosh-phi.vercel.app",
-     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-    credentials: true,
-}
-))
+const corsOptions = {
+  origin: "https://todoosh-phi.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  credentials: true,
+};
+
+// ✅ Apply CORS middleware
+app.use(cors(corsOptions));
 
 app.use(express.json())
 await conn()
