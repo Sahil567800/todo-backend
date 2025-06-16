@@ -16,13 +16,17 @@ const port = process.env.PORT || 3000;
 // ✅ Apply CORS middleware
 // app.use(cors());
 app.use((req, res, next) => {
+  // Always set these headers
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+
+  // Handle preflight
   if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-    res.header("Access-Control-Allow-Headers", "Content-Type");
-    return res.sendStatus(204); // ✅ Safe response 
+    return res.sendStatus(204);
   }
-  next(); 
+
+  next();
 });
 app.use(express.json())
 await conn()
