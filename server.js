@@ -7,27 +7,13 @@ import crud from "./routes/crud.js"
 const app = express()
 const port = process.env.PORT || 3000;
 
-// const corsOptions = {
-//   origin: "*",
-//   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-//    credentials: false
-// };
+const corsOptions = {
+  origin: "*",
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+};
 
-// ✅ Apply CORS middleware
-// app.use(cors());
-app.use((req, res, next) => {
-  // Always set these headers
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
+app.use(cors(corsOptions));
 
-  // Handle preflight
-  if (req.method === "OPTIONS") {
-    return res.sendStatus(204);
-  }
-
-  next();
-});
 app.use(express.json())
 await conn()
 app.get('/', (req, res) => {
