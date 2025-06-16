@@ -17,10 +17,9 @@ const port = process.env.PORT || 3000;
 // app.use(cors());
 app.use((req, res, next) => {
   if (req.method === "OPTIONS") {
-    res.header("Access-Control-Allow-Origin", "https://todoosh-phi.vercel.app");
+    res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
     res.header("Access-Control-Allow-Headers", "Content-Type");
-    res.header("Access-Control-Allow-Credentials", "true");
     return res.sendStatus(204); // ✅ Safe response 
   }
   next(); 
